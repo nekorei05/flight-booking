@@ -1,2 +1,2 @@
 # flight-booking
-a flight booking system
+a flight booking system (backend)
