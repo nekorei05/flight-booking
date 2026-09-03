@@ -1,5 +1,6 @@
 package com.example.flight.entity;
 
+import com.example.flight.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,13 +11,6 @@ import java.time.LocalDateTime;
 @Data
 @Table(name = "payments")
 public class Payment extends BaseEntity {
-
-    public enum PaymentStatus {
-        PENDING,
-        SUCCESS,
-        FAILED,
-        REFUNDED
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_seq_gen")

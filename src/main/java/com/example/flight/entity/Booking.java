@@ -1,5 +1,5 @@
 package com.example.flight.entity;
-
+import com.example.flight.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,11 +11,7 @@ import java.util.List;
 @Table(name = "bookings")
 public class Booking extends BaseEntity {
 
-    public enum BookingStatus {
-        PENDING,
-        CONFIRMED,
-        CANCELLED
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_seq_gen")

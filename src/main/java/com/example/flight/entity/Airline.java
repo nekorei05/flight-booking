@@ -1,6 +1,4 @@
 package com.example.flight.entity;
-
-import com.example.flight.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 

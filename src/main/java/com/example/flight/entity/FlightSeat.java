@@ -1,5 +1,6 @@
 package com.example.flight.entity;
 
+import com.example.flight.enums.SeatStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,10 +16,6 @@ import lombok.Data;
 )
 public class FlightSeat extends BaseEntity {
 
-    public enum SeatStatus {
-        AVAILABLE,
-        BOOKED
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seat_seq_gen")

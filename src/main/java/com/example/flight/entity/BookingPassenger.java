@@ -1,5 +1,6 @@
 package com.example.flight.entity;
 
+import com.example.flight.enums.PassengerGender;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,11 +9,7 @@ import lombok.Data;
 @Table(name = "booking_passengers")
 public class BookingPassenger extends BaseEntity {
 
-    public enum PassengerGender {
-        MALE,
-        FEMALE,
-        OTHER
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_passenger_seq_gen")

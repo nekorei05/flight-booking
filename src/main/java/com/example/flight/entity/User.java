@@ -1,6 +1,6 @@
 package com.example.flight.entity;
 
-import com.example.flight.entity.BaseEntity;
+import com.example.flight.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,11 +10,6 @@ import java.util.List;
 @Data
 @Table(name = "users")
 public class User extends BaseEntity {
-
-    public enum UserRole {
-        PASSENGER,
-        ADMIN
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")
@@ -41,9 +36,6 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private UserRole role;
-
-    @Column(name = "is_otp_verified")
-    private Boolean isOtpVerified = true;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Booking> bookings;
