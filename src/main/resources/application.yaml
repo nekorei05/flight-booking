@@ -1,6 +1,4 @@
 spring:
-  config:
-    import: "optional:file:.env[.properties]"
   application:
     name: flight
   datasource:
@@ -12,6 +10,3 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-
-jwt:
-    secret: ${JWT_SECRET}

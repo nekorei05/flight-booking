@@ -1,6 +1,5 @@
 package com.example.flight.controller;
 
-import com.example.flight.model.AuthResponse;
 import com.example.flight.model.LoginRequest;
 import com.example.flight.model.RegisterRequest;
 import com.example.flight.service.AuthService;

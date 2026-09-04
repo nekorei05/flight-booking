@@ -1,6 +1,5 @@
 package com.example.flight.config;
 
-import com.example.flight.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
