@@ -3,6 +3,7 @@ package com.example.flight.controller;
 import com.example.flight.model.LoginRequest;
 import com.example.flight.model.RegisterRequest;
 import com.example.flight.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,13 +17,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
+    public String register(@Valid @RequestBody RegisterRequest request) {
         authService.register(request);
         return "User registered successfully";
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
+    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
         String token = authService.login(request);
         return new AuthResponse(token);
     }
