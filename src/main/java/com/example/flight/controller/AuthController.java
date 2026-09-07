@@ -1,13 +1,18 @@
 package com.example.flight.controller;
 
+import com.example.flight.entity.User;
+import com.example.flight.model.AuthResponse;
 import com.example.flight.model.LoginRequest;
 import com.example.flight.model.RegisterRequest;
 import com.example.flight.service.AuthService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200"})
 public class AuthController {
 
     private final AuthService authService;
@@ -17,14 +22,18 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @RequestBody RegisterRequest request) {
-        authService.register(request);
-        return "User registered successfully";
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
+        User user = authService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(toResponse(user, "User registered successfully"));
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@Valid @RequestBody LoginRequest request) {
-        String token = authService.login(request);
-        return new AuthResponse(token);
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        User user = authService.login(request);
+        return ResponseEntity.ok(toResponse(user, "Login successful"));
+    }
+
+    private AuthResponse toResponse(User user, String message) {
+        return new AuthResponse(user.getUserId(), user.getFullName(), user.getEmail(), user.getRole(), message);
     }
 }
