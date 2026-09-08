@@ -13,7 +13,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/airlines")
 @CrossOrigin(origins = {
-        "http://localhost:3000",
         "http://localhost:4200",
         "https://*.ngrok-free.app",
         "https://*.ngrok-free.dev"
