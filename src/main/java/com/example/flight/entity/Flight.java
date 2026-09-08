@@ -64,4 +64,7 @@ public class Flight extends BaseEntity {
     @OneToMany(mappedBy = "flight", fetch = FetchType.LAZY)
     private List<FlightSeat> seats;
 
+    @OneToMany(mappedBy = "flight", fetch = FetchType.LAZY)
+    private List<Booking> bookings;
+
 }
