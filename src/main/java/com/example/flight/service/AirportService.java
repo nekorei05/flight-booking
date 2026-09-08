@@ -1,6 +1,7 @@
 package com.example.flight.service;
 
 import com.example.flight.entity.Airport;
+import com.example.flight.exception.ResourceNotFoundException;
 import com.example.flight.model.airline.AirlineRequest;
 import com.example.flight.model.airline.AirlineResponse;
 import com.example.flight.model.airport.AirportRequest;
@@ -58,7 +59,7 @@ public class AirportService {
     public AirportResponse getAirportByCode(String airportCode) {
 
         Airport airport = airportRepository.findById(airportCode)
-                .orElseThrow(() -> new RuntimeException("Airport not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Airport not found"));
 
         return new AirportResponse(
                 airport.getAirportCode(),
@@ -72,7 +73,7 @@ public class AirportService {
             AirportRequest airportRequest) {
 
         Airport airport = airportRepository.findById(airportCode)
-                .orElseThrow(() -> new RuntimeException("Airport not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Airport not found"));
 
         airport.setAirportName(airportRequest.getAirportName());
         airport.setCity(airportRequest.getCity());
@@ -91,7 +92,7 @@ public class AirportService {
     public String deleteAirport(String airportCode) {
 
         Airport airport = airportRepository.findById(airportCode)
-                .orElseThrow(() -> new RuntimeException("Airport not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Airport not found"));
 
         airportRepository.delete(airport);
 

@@ -1,5 +1,6 @@
 package com.example.flight.service;
 import com.example.flight.entity.Airline;
+import com.example.flight.exception.ResourceNotFoundException;
 import com.example.flight.model.airline.AirlineRequest;
 import com.example.flight.model.airline.AirlineResponse;
 import com.example.flight.repository.AirlineRepository;
@@ -55,8 +56,7 @@ public class AirlineService {
     public AirlineResponse getAirlineById(Long id){
 
         Airline airline = airlineRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Airline not found"));
-
+                .orElseThrow(() -> new ResourceNotFoundException("Airline not found"));
             return new AirlineResponse(
                     airline.getAirlineId(),
                     airline.getAirlineCode(),
@@ -68,7 +68,7 @@ public class AirlineService {
     public AirlineResponse updateAirline(Long id, AirlineRequest airlineRequest){
 
         Airline airline = airlineRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Airline not found"));
+                .orElseThrow(()-> new ResourceNotFoundException("Airline not found"));
 
         airline.setAirlineCode(airlineRequest.getAirlineCode());
         airline.setAirlineName(airlineRequest.getAirlineName());
@@ -86,7 +86,7 @@ public class AirlineService {
 
     public String deleteAirline(Long id){
         Airline airline=airlineRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Airline not found"));
+                .orElseThrow(()-> new ResourceNotFoundException("Airline not found"));
 
         airlineRepository.delete(airline);
 
