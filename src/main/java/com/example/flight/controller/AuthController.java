@@ -12,7 +12,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4200"})
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "https://*.ngrok-free.app",
+        "https://*.ngrok-free.dev"
+})
+
 public class AuthController {
 
     private final AuthService authService;
