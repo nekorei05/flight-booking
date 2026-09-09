@@ -11,12 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+
 @RequestMapping("/api/flights")
-@CrossOrigin(origins = {
-        "http://localhost:4200",
-        "https://*.ngrok-free.app",
-        "https://*.ngrok-free.dev"
-})
+@CrossOrigin(origins = "http://localhost:4200")
 public class FlightController {
 
     private final FlightService flightService;
