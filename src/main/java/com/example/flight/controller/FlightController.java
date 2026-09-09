@@ -1,5 +1,6 @@
 package com.example.flight.controller;
 
+import com.example.flight.model.booking.SeatResponse;
 import com.example.flight.model.flight.FlightRequest;
 import com.example.flight.model.flight.FlightResponse;
 import com.example.flight.service.FlightService;
@@ -55,6 +56,15 @@ public class FlightController {
         return ResponseEntity.ok(flights);
     }
 
+    @GetMapping("/{flightId}/seats")
+    public ResponseEntity<List<SeatResponse>> getSeats(
+            @PathVariable Long flightId) {
+
+        return ResponseEntity.ok(
+                flightService.getSeats(flightId)
+        );
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<FlightResponse> getFlightById(
             @PathVariable Long id) {
@@ -64,6 +74,8 @@ public class FlightController {
 
         return ResponseEntity.ok(flightResponse);
     }
+
+
 
     @PutMapping("/{id}")
     public ResponseEntity<FlightResponse> updateFlight(
@@ -85,6 +97,7 @@ public class FlightController {
 
         return ResponseEntity.ok(Map.of("message", resultMessage));
     }
+
 
 
 

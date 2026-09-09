@@ -7,6 +7,7 @@ import com.example.flight.entity.FlightSeat;
 import com.example.flight.enums.SeatStatus;
 import com.example.flight.exception.BadRequestException;
 import com.example.flight.exception.ResourceNotFoundException;
+import com.example.flight.model.booking.SeatResponse;
 import com.example.flight.model.flight.FlightRequest;
 import com.example.flight.model.flight.FlightResponse;
 import com.example.flight.repository.AirlineRepository;
@@ -246,6 +247,30 @@ public class FlightService {
 
         for (Flight flight : flights) {
             responses.add(mapToResponse(flight));
+        }
+
+        return responses;
+    }
+
+    public List<SeatResponse> getSeats(Long flightId) {
+
+        flightRepository.findById(flightId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Flight not found"));
+
+        List<FlightSeat> seats =
+                flightSeatRepository.findByFlightFlightId(flightId);
+
+        List<SeatResponse> responses = new ArrayList<>();
+
+        for (FlightSeat seat : seats) {
+            responses.add(
+                    SeatResponse.builder()
+                            .seatId(seat.getSeatId())
+                            .seatNumber(seat.getSeatNumber())
+                            .status(seat.getStatus())
+                            .build()
+            );
         }
 
         return responses;
