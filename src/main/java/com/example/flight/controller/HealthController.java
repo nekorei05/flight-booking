@@ -7,7 +7,6 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-
 public class HealthController {
     @GetMapping("/health")
     public Map<String, String> health() {
