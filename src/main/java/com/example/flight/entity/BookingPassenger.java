@@ -1,15 +1,12 @@
 package com.example.flight.entity;
 
-import com.example.flight.enums.PassengerGender;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "booking_passengers")
-public class BookingPassenger extends BaseEntity {
-
-
+public class BookingPassenger extends PassengerDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "booking_passenger_seq_gen")
@@ -28,17 +25,4 @@ public class BookingPassenger extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seat_id", nullable = false)
     private FlightSeat seat;
-
-    @Column(name = "passenger_name", nullable = false, length = 100)
-    private String passengerName;
-
-    @Column(name = "passenger_age", nullable = false)
-    private Integer passengerAge;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "passenger_gender", nullable = false, length = 20)
-    private PassengerGender passengerGender;
-
-    @Column(name = "passport_number", nullable = false, length = 20)
-    private String passportNumber;
 }
