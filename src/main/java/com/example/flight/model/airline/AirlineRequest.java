@@ -15,5 +15,4 @@ public class AirlineRequest {
     @NotBlank(message = "Airline name is required")
     private String airlineName;
 
-    private String logoPath;
 }

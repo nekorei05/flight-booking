@@ -14,5 +14,4 @@ public class AirlineResponse {
     private Long airlineId;
     private String airlineCode;
     private String airlineName;
-    private String logoPath;
 }

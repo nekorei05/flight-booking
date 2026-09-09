@@ -28,8 +28,6 @@ public class Airline extends BaseEntity {
     @Column(name = "airline_name", nullable = false, unique = true, length = 100)
     private String airlineName;
 
-    @Column(name = "logo_path", length = 255)
-    private String logoPath;
 
     @OneToMany(mappedBy = "airline", fetch = FetchType.LAZY)
     private List<Flight> flights;

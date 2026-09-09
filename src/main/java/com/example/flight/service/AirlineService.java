@@ -23,15 +23,14 @@ public class AirlineService {
         Airline airline = new Airline();
         airline.setAirlineCode(airlineRequest.getAirlineCode());
         airline.setAirlineName(airlineRequest.getAirlineName());
-        airline.setLogoPath(airlineRequest.getLogoPath());
 
         Airline savedAirline = airlineRepository.save(airline);
 
         return new AirlineResponse(
                 savedAirline.getAirlineId(),
                 savedAirline.getAirlineCode(),
-                savedAirline.getAirlineName(),
-                savedAirline.getLogoPath()
+                savedAirline.getAirlineName()
+
         );
     }
 
@@ -45,8 +44,8 @@ public class AirlineService {
             airlineResponses.add(new AirlineResponse(
                     airL.getAirlineId(),
                     airL.getAirlineCode(),
-                    airL.getAirlineName(),
-                    airL.getLogoPath()
+                    airL.getAirlineName()
+
             ));
         }
         return airlineResponses;
@@ -60,8 +59,8 @@ public class AirlineService {
             return new AirlineResponse(
                     airline.getAirlineId(),
                     airline.getAirlineCode(),
-                    airline.getAirlineName(),
-                    airline.getLogoPath()
+                    airline.getAirlineName()
+
             );
     }
 
@@ -72,15 +71,15 @@ public class AirlineService {
 
         airline.setAirlineCode(airlineRequest.getAirlineCode());
         airline.setAirlineName(airlineRequest.getAirlineName());
-        airline.setLogoPath(airlineRequest.getLogoPath());
+
 
         Airline updatedAirline = airlineRepository.save(airline);
 
         return new AirlineResponse(
                 updatedAirline.getAirlineId(),
                 updatedAirline.getAirlineCode(),
-                updatedAirline.getAirlineName(),
-                updatedAirline.getLogoPath()
+                updatedAirline.getAirlineName()
+
         );
     }
 
