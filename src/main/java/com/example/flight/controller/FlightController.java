@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +43,18 @@ public class FlightController {
         return ResponseEntity.ok(flightResponses);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<FlightResponse>> searchFlights(
+            @RequestParam String departure,
+            @RequestParam String arrival,
+            @RequestParam LocalDate date) {
+
+        List<FlightResponse> flights =
+                flightService.searchFlights(departure, arrival, date);
+
+        return ResponseEntity.ok(flights);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<FlightResponse> getFlightById(
             @PathVariable Long id) {
@@ -71,4 +85,8 @@ public class FlightController {
 
         return ResponseEntity.ok(Map.of("message", resultMessage));
     }
+
+
+
+
 }

@@ -15,6 +15,8 @@ import com.example.flight.repository.FlightRepository;
 import com.example.flight.repository.FlightSeatRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -200,4 +202,53 @@ public class FlightService {
                 .pricePerSeat(flight.getPricePerSeat())
                 .build();
     }
+    public List<FlightResponse> searchFlights(
+            String departure,
+            String arrival,
+            LocalDate date) {
+
+        String departureCode = departure.trim().toUpperCase();
+        String arrivalCode = arrival.trim().toUpperCase();
+
+        Airport departureAirport = airportRepository.findById(departureCode)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Departure airport not found"));
+
+        Airport arrivalAirport = airportRepository.findById(arrivalCode)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Arrival airport not found"));
+
+        if (departureAirport.getAirportCode()
+                .equals(arrivalAirport.getAirportCode())) {
+
+            throw new BadRequestException(
+                    "Departure and arrival airports cannot be the same"
+            );
+        }
+
+        if (date.isBefore(LocalDate.now())) {
+            throw new BadRequestException(
+                    "Flight date cannot be in the past"
+            );
+        }
+
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.plusDays(1).atStartOfDay();
+
+        List<Flight> flights = flightRepository.searchFlights(
+                departureCode,
+                arrivalCode,
+                startOfDay,
+                endOfDay
+        );
+
+        List<FlightResponse> responses = new ArrayList<>();
+
+        for (Flight flight : flights) {
+            responses.add(mapToResponse(flight));
+        }
+
+        return responses;
+    }
+
 }
