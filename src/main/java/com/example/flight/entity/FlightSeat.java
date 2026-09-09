@@ -15,6 +15,7 @@ import lombok.Data;
         }
 )
 public class FlightSeat extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seat_seq_gen")
     @SequenceGenerator(
@@ -35,4 +36,8 @@ public class FlightSeat extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private SeatStatus status;
+
+    @Version
+    @Column(nullable = false)
+    private Integer version;
 }
