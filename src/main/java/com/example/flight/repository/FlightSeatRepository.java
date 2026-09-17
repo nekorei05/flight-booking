@@ -25,6 +25,7 @@ public interface FlightSeatRepository extends JpaRepository<FlightSeat, Long> {
             List<Long> seatIds
     );
 
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("""
             SELECT s

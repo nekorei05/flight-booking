@@ -82,7 +82,7 @@ public class PaymentService {
             paymentRepository.save(payment);
 
 
-            booking.setStatus(BookingStatus.CANCELLED);
+            booking.setStatus(BookingStatus.PAYMENT_FAILED);
 
             bookingRepository.save(booking);
 

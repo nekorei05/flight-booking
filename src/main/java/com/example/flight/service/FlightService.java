@@ -275,5 +275,31 @@ public class FlightService {
 
         return responses;
     }
+    public List<SeatResponse> getAvailableSeats(Long flightId) {
+
+        flightRepository.findById(flightId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Flight not found"));
+
+        List<FlightSeat> seats =
+                flightSeatRepository.findByFlightFlightIdAndStatus(
+                        flightId,
+                        SeatStatus.AVAILABLE
+                );
+
+        List<SeatResponse> responses = new ArrayList<>();
+
+        for (FlightSeat seat : seats) {
+            responses.add(
+                    SeatResponse.builder()
+                            .seatId(seat.getSeatId())
+                            .seatNumber(seat.getSeatNumber())
+                            .status(seat.getStatus())
+                            .build()
+            );
+        }
+
+        return responses;
+    }
 
 }
